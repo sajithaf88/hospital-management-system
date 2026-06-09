@@ -1,0 +1,96 @@
+﻿@model ChirayuHospitalMVC.Models.Billing
+@{
+    ViewData["Title"] = "Billing Details";
+}
+
+<style>
+    .page-wrapper {
+        padding: 40px 0
+    }
+
+    .details-card {
+        max-width: 1100px;
+        margin: auto;
+        background: #fff;
+        border-radius: 16px;
+        padding: 32px 36px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08)
+    }
+
+    body[data-theme="dark"] .details-card {
+        background: #020617
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 24px
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 40px
+    }
+
+    label {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #64748b
+    }
+
+    .value {
+        font-size: 16px;
+        font-weight: 600
+    }
+
+    body[data-theme="dark"] label {
+        color: #94a3b8
+    }
+
+    body[data-theme="dark"] .value {
+        color: #f8fafc
+    }
+
+    .actions {
+        margin-top: 30px;
+        display: flex;
+        gap: 12px
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        color: #111827;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none
+    }
+</style>
+
+<div class="page-wrapper">
+    <div class="details-card">
+        <h1>Billing Details</h1>
+
+        <div class="grid">
+            <div><label>Patient</label><div class="value">@Model.Patient?.Name</div></div>
+            <div><label>Date</label><div class="value">@Model.BillingDate.ToString("dd-MMM-yyyy")</div></div>
+            <div><label>Consultation</label><div class="value">₹@Model.ConsultationFee</div></div>
+            <div><label>Medicines</label><div class="value">₹@Model.MedicineCost</div></div>
+            <div><label>Treatment</label><div class="value">₹@Model.TreatmentCost</div></div>
+            <div><label>Other</label><div class="value">₹@Model.AdditionalCharges</div></div>
+            <div><label>Total</label><div class="value">₹@Model.TotalAmount</div></div>
+        </div>
+
+        <div class="actions">
+            <a asp-action="Edit" asp-route-id="@Model.BillingId" class="btn-primary">Edit</a>
+            <a asp-action="Index" class="btn-secondary">Back</a>
+        </div>
+    </div>
+</div>

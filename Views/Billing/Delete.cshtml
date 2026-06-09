@@ -1,0 +1,122 @@
+﻿@model ChirayuHospitalMVC.Models.Billing
+
+@{
+    ViewData["Title"] = "Delete Bill";
+}
+
+<div class="page-header">
+    <h1 class="page-title text-danger">Delete Bill</h1>
+    <p class="page-subtitle">This action cannot be undone</p>
+</div>
+
+<div class="delete-card">
+
+    <div class="warning-box">
+        <i class="bi bi-exclamation-triangle-fill warning-icon"></i>
+        <p>
+            Are you sure you want to delete billing record for
+            <strong>@Model.Patient?.Name</strong>?
+        </p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- Strongly typed primary key -->
+        <input type="hidden" asp-for="BillingId" />
+
+        <div class="form-actions">
+            <button type="submit" class="btn-danger-delete">
+                <i class="bi bi-trash"></i> Delete
+            </button>
+
+            <a asp-action="Index" class="btn-cancel">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .page-wrapper {
+        padding: 40px 0;
+    }
+
+    .delete-card {
+        max-width: 650px;
+        margin: auto;
+        padding: 28px;
+        border-radius: 18px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    body[data-theme="dark"] .delete-card {
+        background: #020617;
+        border: 1px solid #233143;
+        box-shadow: none;
+    }
+
+    .warning-box {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: rgba(239, 68, 68, 0.12);
+        border-left: 4px solid #ef4444;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+    }
+
+        .warning-box i {
+            font-size: 26px;
+            color: #ef4444;
+        }
+
+        .warning-box p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #7f1d1d;
+            margin: 0;
+        }
+
+    body[data-theme="dark"] .warning-box p {
+        color: #fecaca;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 14px;
+        justify-content: flex-end;
+    }
+
+    .btn-danger-delete {
+        background: #ef4444;
+        color: #fff !important;
+        padding: 12px 22px;
+        border-radius: 10px;
+        font-weight: 700;
+        border: none;
+    }
+
+        .btn-danger-delete:hover {
+            background: #dc2626;
+            box-shadow: 0 0 14px rgba(239, 68, 68, 0.45);
+        }
+
+    .btn-cancel {
+        background: #e5e7eb;
+        color: #111827 !important;
+        padding: 12px 22px;
+        border-radius: 10px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    body[data-theme="dark"] .btn-cancel {
+        background: #1e293b;
+        color: #cbd5e1 !important;
+    }
+
+</style>

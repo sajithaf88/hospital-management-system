@@ -1,0 +1,303 @@
+@model IEnumerable<ChirayuHospitalMVC.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1>Doctors</h1>
+        <p class="subtitle">Manage all doctor profiles</p>
+    </div>
+
+    <div class="card-container">
+
+        <div class="card-header">
+
+            <h2 class="card-title">Doctor List</h2>
+
+            <div class="toolbar">
+
+                <input type="text"
+                       id="doctorSearch"
+                       placeholder="Search doctor name..."
+                       onkeyup="searchDoctor()" />
+
+                <a asp-action="Create" class="btn-primary">
+                    <i class="bi bi-plus-lg"></i> Add Doctor
+                </a>
+
+            </div>
+
+        </div>
+
+        <table class="modern-table">
+
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                    <th>Specialization</th>
+                    <th>Contact</th>
+                    <th style="width:160px;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var d in Model)
+                {
+                    <tr>
+
+                        <td class="doctor-cell">
+
+                            <div class="avatar">
+                                @d.Name.Substring(0, 1)
+                            </div>
+
+                            <span>@d.Name</span>
+
+                        </td>
+
+                        <td>
+                            <span class="dept-badge">
+                                @(d.Department?.Name ?? "Not Assigned")
+                            </span>
+                        </td>
+
+                        <td>@d.Specialization</td>
+
+                        <td>@d.Contact</td>
+
+                        <td class="table-actions">
+
+                            <a asp-action="Details"
+                               asp-route-id="@d.DoctorId"
+                               class="btn-icon view">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@d.DoctorId"
+                               class="btn-icon edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@d.DoctorId"
+                               class="btn-icon delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+
+    function searchDoctor(){
+
+        var input = document.getElementById("doctorSearch");
+        var filter = input.value.toLowerCase();
+
+        var rows = document.querySelectorAll(".modern-table tbody tr");
+
+        rows.forEach(function(row){
+
+            var name = row.cells[0].innerText.toLowerCase();
+
+            if(name.includes(filter)){
+                row.style.display="";
+            }
+            else{
+                row.style.display="none";
+            }
+
+        });
+
+    }
+
+</script>
+
+
+<style>
+
+    /* PAGE */
+
+    .page-wrapper {
+        padding: 40px 0;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #64748b;
+    }
+
+
+    /* CARD */
+
+    .card-container {
+        margin-top: 24px;
+        border-radius: 18px;
+        padding: 28px 32px;
+        background: #ffffff;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+
+    /* HEADER */
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+
+    /* TOOLBAR */
+
+    .toolbar {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    #doctorSearch {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        width: 250px;
+    }
+
+
+    /* TABLE */
+
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .modern-table thead th {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #64748b;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .modern-table tbody tr {
+            border-top: 1px solid #e5e7eb;
+            transition: .15s;
+        }
+
+            .modern-table tbody tr:hover {
+                background: #f8fafc;
+            }
+
+        .modern-table td {
+            padding: 14px 12px;
+        }
+
+
+    /* DOCTOR CELL */
+
+    .doctor-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+    }
+
+    .avatar {
+        width: 34px;
+        height: 34px;
+        background: #2563eb;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+
+    /* DEPARTMENT BADGE */
+
+    .dept-badge {
+        background: #e0e7ff;
+        color: #3730a3;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+
+    /* ACTIONS */
+
+    .table-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .view {
+        background: #0f172a;
+    }
+
+    .edit {
+        background: #2563eb;
+    }
+
+    .delete {
+        background: #ef4444;
+    }
+
+
+    /* ADD BUTTON */
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+</style>

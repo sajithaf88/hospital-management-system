@@ -1,0 +1,66 @@
+﻿@model ChirayuHospitalMVC.Models.RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Chirayu Hospital</title>
+
+    <link rel="stylesheet" href="~/css/login.css" />
+
+</head>
+
+<body class="login-body">
+
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+            <div class="login-logo">C</div>
+
+            <h2>Create Account</h2>
+            <p class="login-subtitle">Register a new admin user</p>
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="input-group">
+                    <input asp-for="Username" placeholder="Username" required />
+                </div>
+
+                <div class="input-group">
+                    <input asp-for="Email" placeholder="Email (optional)" />
+                </div>
+
+                <div class="input-group">
+                    <input asp-for="Password" type="password" placeholder="Password" required />
+                </div>
+
+                <div class="input-group">
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" required />
+                </div>
+
+                <button type="submit" class="login-btn">Create Account</button>
+
+                <div class="login-footer">
+                    <a asp-controller="Account" asp-action="Login">Already have an account?</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+@model ChirayuHospitalMVC.Models.Department
+
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<div class="form-wrapper">
+
+    ```
+    <div class="form-card">
+
+        <h2>Edit Department</h2>
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="DepartmentId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="grid">
+
+                <div class="form-group">
+                    <label>Department Name</label>
+
+                    <input asp-for="Name"
+                           placeholder="Enter department name"
+                           required />
+
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+
+                    <input asp-for="Description"
+                           placeholder="Enter description" />
+
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button type="submit" class="btn-primary">
+                    Update Department
+                </button>
+
+                <a asp-action="Index" class="btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+    ```
+
+</div>
+
+<style>
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 650px;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+    }
+
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 13px;
+    }
+
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

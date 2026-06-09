@@ -1,0 +1,100 @@
+﻿@model ChirayuHospitalMVC.Models.Appointment
+
+@{
+    ViewData["Title"] = "Delete Appointment";
+}
+
+<div class="page-wrapper">
+
+    <div class="delete-card">
+
+        <h2 class="danger-title">Delete Appointment</h2>
+
+        <p class="warning">
+            Are you sure you want to delete the appointment for
+            <strong>@Model.Patient?.Name</strong>?
+        </p>
+
+        <div class="info">
+
+            <p><strong>Date:</strong> @Model.Date.ToString("dd-MMM-yyyy")</p>
+            <p><strong>Time:</strong> @Model.Time</p>
+            <p><strong>Doctor:</strong> @Model.Doctor?.Name</p>
+
+        </div>
+
+        <form asp-action="Delete" method="post">
+
+            <input type="hidden" asp-for="AppointmentId" />
+
+            <div class="actions">
+
+                <button type="submit" class="btn-danger">
+                    Delete
+                </button>
+
+                <a asp-action="Index" class="btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .page-wrapper {
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .delete-card {
+        max-width: 600px;
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+    .danger-title {
+        color: #ef4444;
+        margin-bottom: 15px;
+    }
+
+    .warning {
+        margin-bottom: 20px;
+    }
+
+    .info p {
+        margin-bottom: 8px;
+    }
+
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-danger {
+        background: #ef4444;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: black;
+    }
+
+</style>

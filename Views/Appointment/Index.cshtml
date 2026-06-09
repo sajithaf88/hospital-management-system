@@ -1,0 +1,173 @@
+﻿@model IEnumerable<ChirayuHospitalMVC.Models.Appointment>
+@using ChirayuHospitalMVC.Models
+
+@{
+    ViewData["Title"] = "Appointments";
+}
+
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1>Appointments</h1>
+        <p class="subtitle">Manage all appointments</p>
+    </div>
+
+    <div class="card-container">
+
+        <table class="modern-table">
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Token</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var a in Model)
+                {
+
+                    <tr>
+
+                        <td>@a.Patient?.Name</td>
+
+                        <td>@a.Doctor?.Name</td>
+
+                        <td>@a.Date.ToString("dd-MMM-yyyy")</td>
+
+                        <td>@a.Time</td>
+
+                        <td>@a.TokenNumber</td>
+
+                        <td>
+
+                            @if (a.Status == AppointmentStatus.Scheduled)
+                            {
+                                <span style="color:#f59e0b;font-weight:600;">Scheduled</span>
+                            }
+
+                            else if (a.Status == AppointmentStatus.Completed)
+                            {
+                                <span style="color:#16a34a;font-weight:600;">Completed</span>
+                            }
+
+                            else if (a.Status == AppointmentStatus.Cancelled)
+                            {
+                                <span style="color:#ef4444;font-weight:600;">Cancelled</span>
+                            }
+
+                        </td>
+
+                        <td class="table-actions">
+
+                            @if (a.Status == AppointmentStatus.Scheduled)
+                            {
+
+                                <a asp-action="Approve"
+                                   asp-route-id="@a.AppointmentId"
+                                   class="btn-icon edit">
+                                    ✔
+                                </a>
+
+                                <a asp-action="Cancel"
+                                   asp-route-id="@a.AppointmentId"
+                                   class="btn-icon delete">
+                                    ✖
+                                </a>
+
+                            }
+
+                            else
+                            {
+                                <span class="text-muted">Locked</span>
+                            }
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .page-wrapper {
+        padding: 40px 0;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #64748b;
+    }
+
+    .card-container {
+        margin-top: 24px;
+        border-radius: 18px;
+        padding: 28px 32px;
+        background: #ffffff;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .modern-table thead th {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #64748b;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .modern-table tbody tr {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .modern-table td {
+            padding: 14px 12px;
+        }
+
+    .table-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .edit {
+        background: #16a34a;
+    }
+
+    .delete {
+        background: #ef4444;
+    }
+
+</style>

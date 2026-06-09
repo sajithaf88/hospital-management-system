@@ -1,0 +1,153 @@
+@model ChirayuHospitalMVC.Models.Doctor
+
+@{
+    ViewData["Title"] = "Doctor Profile";
+}
+
+<div class="page-wrapper">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="avatar">
+                @Model.Name.Substring(0, 1)
+            </div>
+
+            <div>
+                <h2>@Model.Name</h2>
+                <p class="subtitle">Doctor Profile</p>
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-item">
+                <label>Specialization</label>
+                <div>@Model.Specialization</div>
+            </div>
+
+            <div class="info-item">
+                <label>Contact</label>
+                <div>@Model.Contact</div>
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.DoctorId"
+               class="btn-primary">
+                Edit Doctor
+            </a>
+
+            <a asp-action="Index"
+               class="btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    /* PAGE */
+
+    .page-wrapper {
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    /* CARD */
+
+    .profile-card {
+        width: 100%;
+        max-width: 700px;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+
+    /* HEADER */
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 25px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #2563eb;
+        color: white;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        color: #64748b;
+    }
+
+
+    /* GRID */
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .info-item label {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .info-item div {
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+
+    /* BUTTONS */
+
+    .actions {
+        margin-top: 30px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #111827;
+    }
+
+</style>

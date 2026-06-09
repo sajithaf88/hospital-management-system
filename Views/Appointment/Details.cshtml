@@ -1,0 +1,138 @@
+﻿@model ChirayuHospitalMVC.Models.Appointment
+@using ChirayuHospitalMVC.Models
+
+@{
+    ViewData["Title"] = "Appointment Details";
+}
+
+<div class="page-wrapper">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="avatar">
+                @Model.Patient?.Name.Substring(0, 1)
+            </div>
+
+            <div>
+
+                <h2>@Model.Patient?.Name</h2>
+                <p class="subtitle">Appointment Details</p>
+
+            </div>
+
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-item">
+                <label>Date</label>
+                <div>@Model.Date.ToString("dd-MMM-yyyy")</div>
+            </div>
+
+            <div class="info-item">
+                <label>Time</label>
+                <div>@Model.Time</div>
+            </div>
+
+            <div class="info-item">
+                <label>Doctor</label>
+                <div>@Model.Doctor?.Name</div>
+            </div>
+
+            <div class="info-item">
+                <label>Token</label>
+                <div>@Model.TokenNumber</div>
+            </div>
+
+            <div class="info-item">
+                <label>Status</label>
+                <div>@Model.Status</div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+
+            <a asp-action="Index" class="btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .page-wrapper {
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 700px;
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 25px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #2563eb;
+        color: white;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        color: #64748b;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .info-item label {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .info-item div {
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .actions {
+        margin-top: 25px;
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: black;
+    }
+
+</style>

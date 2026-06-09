@@ -1,0 +1,176 @@
+﻿@model ChirayuHospitalMVC.Models.Billing
+@{
+    ViewData["Title"] = "Create Bill";
+}
+
+<style>
+    .page-wrapper {
+        padding: 40px 0;
+    }
+
+    .card {
+        max-width: 1100px;
+        margin: auto;
+        padding: 32px 36px;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+    body[data-theme="dark"] .card {
+        background: #020617;
+        border: 1px solid #1e293b;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #0f172a;
+        margin-bottom: 6px;
+    }
+
+    body[data-theme="dark"] h1 {
+        color: #f8fafc;
+    }
+
+    .subtitle {
+        color: #64748b;
+        margin-bottom: 24px;
+    }
+
+    body[data-theme="dark"] .subtitle {
+        color: #94a3b8;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 18px;
+    }
+
+    @@media (max-width: 900px) {
+        .grid
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+    }
+
+    body[data-theme="dark"] input, body[data-theme="dark"] select {
+        background: #020617;
+        color: #f8fafc;
+        border-color: #334155;
+    }
+
+    .actions {
+        margin-top: 26px;
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+        padding: 12px 22px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        color: #111827;
+        padding: 12px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    body[data-theme="dark"] .btn-secondary {
+        background: #1e293b;
+        color: #cbd5e1;
+    }
+
+    .field-validation-error {
+        color: #dc2626;
+        font-size: 13px;
+        margin-top: 6px;
+    }
+</style>
+
+<div class="page-wrapper">
+    <h1>Create Bill</h1>
+    <div class="subtitle">Generate patient billing</div>
+
+    <div class="card">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="grid">
+
+                <!-- PATIENT DROPDOWN (FIXED: uses ViewBag.Patients) -->
+                <div>
+                    <label>Patient</label>
+                    <select asp-for="PatientId" asp-items="ViewBag.Patients" class="form-control">
+                        <option value="">-- Select Patient --</option>
+                    </select>
+                    <span asp-validation-for="PatientId" class="field-validation-error"></span>
+                </div>
+
+                <div>
+                    <label>Consultation Fee</label>
+                    <input asp-for="ConsultationFee" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="ConsultationFee" class="field-validation-error"></span>
+                </div>
+
+                <div>
+                    <label>Medicine Cost</label>
+                    <input asp-for="MedicineCost" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="MedicineCost" class="field-validation-error"></span>
+                </div>
+
+                <div>
+                    <label>Treatment Cost</label>
+                    <input asp-for="TreatmentCost" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="TreatmentCost" class="field-validation-error"></span>
+                </div>
+
+                <div>
+                    <label>Additional Charges</label>
+                    <input asp-for="AdditionalCharges" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="AdditionalCharges" class="field-validation-error"></span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-primary">Save Bill</button>
+                <a asp-action="Index" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

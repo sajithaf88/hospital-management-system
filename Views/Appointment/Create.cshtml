@@ -1,0 +1,121 @@
+@model ChirayuHospitalMVC.Models.Appointment
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<div class="form-wrapper">
+
+    <div class="form-card">
+
+        <h2>Book Appointment</h2>
+
+        <form asp-action="Create" method="post">
+
+            <div class="grid">
+
+                <div class="form-group">
+                    <label>Select Doctor</label>
+
+                    <select asp-for="DoctorId"
+                            asp-items="ViewBag.Doctors">
+                        <option value="">Select Doctor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Appointment Date</label>
+                    <input asp-for="Date" type="date" />
+                </div>
+
+                <div class="form-group">
+                    <label>Appointment Time</label>
+                    <input asp-for="Time" type="time" />
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button type="submit" class="btn-primary">
+                    Book Appointment
+                </button>
+
+                <a asp-controller="Patient"
+                   asp-action="Dashboard"
+                   class="btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 650px;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    input, select {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+    }
+
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .btn-secondary {
+        background: #e5e7eb;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: black;
+    }
+
+</style>

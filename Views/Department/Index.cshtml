@@ -1,0 +1,210 @@
+@model IEnumerable<ChirayuHospitalMVC.Models.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1>Departments</h1>
+        <p class="subtitle">Manage hospital departments</p>
+    </div>
+
+    <div class="card-container">
+
+        <div class="card-header">
+
+            <h2 class="card-title">Department List</h2>
+
+            <a asp-action="Create" class="btn-primary">
+                <i class="bi bi-plus-lg"></i> Add Department
+            </a>
+
+        </div>
+
+        <table class="modern-table">
+
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Description</th>
+                    <th style="width:160px;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var d in Model)
+                {
+                    <tr>
+
+                        <td class="department-cell">
+
+                            <div class="avatar">
+                                @d.Name.Substring(0, 1)
+                            </div>
+
+                            <span>@d.Name</span>
+
+                        </td>
+
+                        <td>@d.Description</td>
+
+                        <td class="table-actions">
+
+                            <a asp-action="Details"
+                               asp-route-id="@d.DepartmentId"
+                               class="btn-icon view">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@d.DepartmentId"
+                               class="btn-icon edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@d.DepartmentId"
+                               class="btn-icon delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .page-wrapper {
+        padding: 40px 0;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #64748b;
+    }
+
+    .card-container {
+        margin-top: 24px;
+        border-radius: 18px;
+        padding: 28px 32px;
+        background: #ffffff;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .modern-table thead th {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #64748b;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .modern-table tbody tr {
+            border-top: 1px solid #e5e7eb;
+            transition: .15s;
+        }
+
+            .modern-table tbody tr:hover {
+                background: #f8fafc;
+            }
+
+        .modern-table td {
+            padding: 14px 12px;
+        }
+
+    .department-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+    }
+
+    .avatar {
+        width: 34px;
+        height: 34px;
+        background: #2563eb;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .table-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .view {
+        background: #0f172a;
+    }
+
+    .edit {
+        background: #2563eb;
+    }
+
+    .delete {
+        background: #ef4444;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+</style>

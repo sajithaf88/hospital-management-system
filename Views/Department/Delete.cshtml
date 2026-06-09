@@ -1,0 +1,130 @@
+﻿@model ChirayuHospitalMVC.Models.Department
+
+@{
+    ViewData["Title"] = "Delete Department";
+}
+
+<div class="delete-wrapper">
+
+    <div class="delete-card">
+
+        <div class="warning-icon">
+            ⚠
+        </div>
+
+        <h2>Delete Department</h2>
+
+        <p class="message">
+            Are you sure you want to delete
+            <strong>@Model.Name</strong> ?
+        </p>
+
+        <form asp-action="Delete" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="DepartmentId" />
+
+            <div class="actions">
+
+                <button type="submit" class="btn-danger">
+                    Delete
+                </button>
+
+                <a asp-action="Index"
+                   class="btn-cancel">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    /* PAGE */
+
+    .delete-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 20px;
+    }
+
+    /* CARD */
+
+    .delete-card {
+        width: 100%;
+        max-width: 420px;
+        padding: 35px;
+        border-radius: 18px;
+        background: #ffffff;
+        box-shadow: 0 20px 40px rgba(0,0,0,.08);
+        text-align: center;
+    }
+
+    /* WARNING ICON */
+
+    .warning-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+        background: #fee2e2;
+        color: #ef4444;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    /* TEXT */
+
+    .message {
+        margin-top: 10px;
+        color: #475569;
+    }
+
+    /* BUTTONS */
+
+    .actions {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .btn-danger {
+        background: #ef4444;
+        color: #ffffff;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+    .btn-cancel {
+        background: #64748b;
+        color: white;
+        padding: 10px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .btn-cancel:hover {
+            background: #475569;
+        }
+
+</style>
